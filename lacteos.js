@@ -1,7 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 //const rutacliente = require('./vista/ClienteRutas');
-//const rutaadmin = require('./vista/AdminRutas');
+const conexion = require('./modelo/bd/Conexion');
+//const rutatrabajador = require('./modelo/admin/RutaCrearTrabajador');
+const rutaadmin = require('./vista/admin/RutaAdmin');
 const app = express();
 const PORT = process.env.PORT || 3333;
 
@@ -17,13 +19,14 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
 // Rutas 
-//app.use('/', rutacliente);
-//app.use('/seguridad', rutaadmin);
+app.use('/', rutaadmin);
+app.use('/clientes', rutaadmin);
 app.get('/',(req, res) => {
     res.send('¡Hola desde mi servidor Node.js!');
 });
 // Iniciar el servidor
-app.listen(PORT, ()  => {
+app.listen(3333, ()  => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
   });
